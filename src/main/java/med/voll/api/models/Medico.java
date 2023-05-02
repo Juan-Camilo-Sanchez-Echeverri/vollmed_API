@@ -2,6 +2,8 @@ package med.voll.api.models;
 
 import jakarta.persistence.*;
 import lombok.*;
+import med.voll.api.medico.DatosActualizarMedico;
+import med.voll.api.medico.DatosRegistroMedico;
 import med.voll.api.medico.Especialidad;
 
 @Table(name = "medicos")
@@ -20,18 +22,36 @@ public class Medico {
     private String email;
     private String telefono;
     private String documento;
+    private  boolean activo;
     @Enumerated(EnumType.STRING)
     private Especialidad especialidad;
     @Embedded
     private Direccion direccion;
 
     public Medico(DatosRegistroMedico datosRegistroMedico) {
-        this.nombre=datosRegistroMedico.nombre();
-        this.email=datosRegistroMedico.email();
-        this.telefono=datosRegistroMedico.telefono();
-        this.documento=datosRegistroMedico.documento();
-        this.especialidad=datosRegistroMedico.especialidad();
-        this.direccion=new Direccion(datosRegistroMedico.direccion());
+        this.activo=true;
+        this.nombre = datosRegistroMedico.nombre();
+        this.email = datosRegistroMedico.email();
+        this.telefono = datosRegistroMedico.telefono();
+        this.documento = datosRegistroMedico.documento();
+        this.especialidad = datosRegistroMedico.especialidad();
+        this.direccion = new Direccion(datosRegistroMedico.direccion());
 
+    }
+
+    public void actualizarDatos(DatosActualizarMedico datosActualizarMedico) {
+        if (datosActualizarMedico.nombre() != null) {
+            this.nombre = datosActualizarMedico.nombre();
+        }
+        if (datosActualizarMedico.documento() != null) {
+            this.documento = datosActualizarMedico.documento();
+        }
+        if (datosActualizarMedico.direccion() != null) {
+            this.direccion = direccion.actualizarDatos(datosActualizarMedico.direccion());
+        }
+    }
+
+    public void desactivarMedico() {
+        this.activo=false;
     }
 }
