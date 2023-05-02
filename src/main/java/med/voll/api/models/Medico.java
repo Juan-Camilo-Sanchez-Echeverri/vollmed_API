@@ -1,8 +1,8 @@
-package med.voll.api.medico;
+package med.voll.api.models;
 
 import jakarta.persistence.*;
 import lombok.*;
-import med.voll.api.direccion.Direccion;
+import med.voll.api.medico.Especialidad;
 
 @Table(name = "medicos")
 @Entity(name = "Medico")
@@ -21,7 +21,7 @@ public class Medico {
     private String telefono;
     private String documento;
     @Enumerated(EnumType.STRING)
-    private  Especialidad especialidad;
+    private Especialidad especialidad;
     @Embedded
     private Direccion direccion;
 
