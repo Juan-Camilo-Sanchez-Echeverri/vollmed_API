@@ -33,7 +33,6 @@ public class PacienteController {
         return ResponseEntity.created(uri).body(new DatosDetalladoPaciente(paciente));
     }
 
-    //traer toodos los pacientes
     @GetMapping
     public ResponseEntity<Page<DatosListadoPaciente>> listar(@PageableDefault(size = 10) Pageable paginacion) {
         return ResponseEntity.ok(pacienteRepository.findAll(paginacion).map(DatosListadoPaciente::new));

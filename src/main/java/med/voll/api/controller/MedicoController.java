@@ -50,6 +50,7 @@ public class MedicoController {
                 medico.getDireccion().getCalle(), medico.getDireccion().getDistrito(), medico.getDireccion().getCiudad(),
                 medico.getDireccion().getNumero(), medico.getDireccion().getComplemento()));
         return ResponseEntity.ok(datosMedico);
+
     }
 
     @PutMapping
@@ -73,10 +74,6 @@ public class MedicoController {
 
         return ResponseEntity.noContent().build();
     }
-    //Delete en la base de datos
-    /*public void eliminarMedico(@PathVariable Long id){
-        Medico medico = medicoRepository.getReferenceById(id);
-        medicoRepository.delete(medico);
-    }*/
+
 
 }
